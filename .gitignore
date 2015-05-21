@@ -2,3 +2,5 @@
 /node_modules
 .env
 .idea
+workspace.xml
+tasks.xml
