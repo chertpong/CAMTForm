@@ -15,19 +15,19 @@ class UserTableSeeder extends Seeder{
         User::create(array(
             'name' => 'admin'
             ,'email' => 'admin@admin.com'
-            ,'password' => '1234'
+            ,'password' => bcrypt('admin')
             ,'role_id' => '1'
         ));
         User::create(array(
             'name' => 'mod'
             ,'email' => 'mod@mod.com'
-            ,'password' => '1234'
+            ,'password' => bcrypt('mod')
             ,'role_id' => '2'
         ));
         User::create(array(
             'name' => 'user'
             ,'email' => 'user@user.com'
-            ,'password' => '1234'
+            ,'password' => bcrypt('user')
             ,'role_id' => '3'
         ));
     }
