@@ -19,3 +19,7 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('roles',['middleware'=>'admin','uses'=>'Auth\RoleController@index']);
+
+Route::get('reports',['middleware'=>'mod','uses'=>'ReportController@index']);

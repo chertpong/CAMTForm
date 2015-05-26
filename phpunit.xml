@@ -10,8 +10,12 @@
          stopOnFailure="false"
          syntaxCheck="false">
     <testsuites>
-        <testsuite name="Application Test Suite">
+        <testsuite name="app">
             <directory>./tests/</directory>
+        </testsuite>
+        <testsuite name="role">
+            <directory>./tests/</directory>
+            <files>RoleAccessTest.php</files>
         </testsuite>
     </testsuites>
     <php>
