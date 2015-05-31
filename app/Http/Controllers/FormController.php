@@ -3,7 +3,9 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FormController extends Controller {
 
@@ -14,7 +16,8 @@ class FormController extends Controller {
 	 */
 	public function index()
 	{
-		return view('forms.index');
+        $student = Student::find(Session::get('studentId'));
+		return view('forms.index')->with('student',$student);
 	}
 
 	/**

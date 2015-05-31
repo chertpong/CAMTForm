@@ -2,7 +2,7 @@
 
 use Closure;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Auth;
 class RoleStudentAccess {
 
 	/**
@@ -17,12 +17,11 @@ class RoleStudentAccess {
         // Admin level = 1
         // Mod level = 2
         // User level = 3
-        if(Auth::check()){
-            if(Auth::user()->role_id == 1 || Session::has('studentId')){
+        if(Auth::check() || Session::has('studentId') ){
+            if(Session::has('studentId')){
                 return $next($request);
             }
             else{
-                Log::info(Auth::user()->id . 'is trying to access mod level route');
                 abort(403, 'Forbidden');
 
             }
