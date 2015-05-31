@@ -28,4 +28,4 @@ Route::get('login/students', 'StudentLoginController@index');
 Route::post('login/students', 'StudentLoginController@postLogin');
 Route::get('logout/students', 'StudentLoginController@getLogout');
 
-Route::get('forms', 'FormController@index');
+Route::get('forms', ['middleware'=>'student','uses'=>'FormController@index']);
