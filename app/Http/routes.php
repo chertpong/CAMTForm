@@ -23,3 +23,9 @@ Route::controllers([
 Route::get('roles',['middleware'=>'admin','uses'=>'Auth\RoleController@index']);
 
 Route::get('reports',['middleware'=>'mod','uses'=>'ReportController@index']);
+
+Route::get('login/students', 'StudentLoginController@index');
+Route::post('login/students', 'StudentLoginController@postLogin');
+Route::get('logout/students', 'StudentLoginController@getLogout');
+
+Route::get('forms', 'FormController@index');

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('ScholarshipSeeder');
         $this->call('SkillSeeder');
         $this->call('StudentLoanSeeder');
+        $this->call('StudentSeeder');
 	}
 
 }

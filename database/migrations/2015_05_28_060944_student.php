@@ -15,6 +15,7 @@ class Student extends Migration {
         Schema::create('student', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->string('id')->primary();
+            $table->string('password',60);
             $table->date('DOB');
             $table->string('nationality');
             $table->string('race');
