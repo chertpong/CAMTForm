@@ -33,7 +33,8 @@ Route::get('forms', ['middleware'=>'student','uses'=>'FormController@index']);
 
 
 Route::get('forms/students/{id}',['middleware'=>'student','uses'=>'StudentController@edit']);
-Route::put('forms/students/{id}',['middleware'=>'student','uses'=>'StudentController@update']);
+//TODO change post to put and change in blade also
+Route::post('forms/students/{id}',['middleware'=>'student','uses'=>'StudentController@update']);
 
 //Route::get('forms/education-history',['middleware'=>'student','uses'=>'FormController@index']);
 //Route::get('forms/family}',['middleware'=>'student','uses'=>'FormController@index']);

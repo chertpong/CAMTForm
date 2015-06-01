@@ -17,14 +17,18 @@
                                 </ul>
                             </div>
                         @endif
-
-                        <form class="form-horizontal" role="form" method="PUT" action="{{ url('forms/students/'.$student->id) }}">
+                        @if (isset($success))
+                            <div class="alert alert-success">
+                                <strong> Success!</strong> {{$success}}
+                            </div>
+                        @endif
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('forms/students/'.$student->id) }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Student ID</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control disabled" name="id" value="{{ $student->id }}">
+                                    <input type="text" class="form-control" name="id" value="{{ $student->id }}" disabled>
                                 </div>
                             </div>
 

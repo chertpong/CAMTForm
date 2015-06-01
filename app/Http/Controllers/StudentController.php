@@ -72,9 +72,23 @@ class StudentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request, $id)
 	{
+        $student = Student::find(Session::get('studentId'));
+        if($id == Session::get('studentId')) {
+            $student->identication_no = $request->get('identication_no');
+            $student->name = $request->get('name');
+            $student->lastname = $request->get('lastname');
+            $student->race = $request->get('race');
+            $student->nationality = $request->get('nationality');
+            $student->save();
 
+            $success = 'Student\' information is updated';
+            return view('students.edit')->with('student', $student)->with('success',$success);
+        }
+        else{
+            return view('students.edit')->with('student', $student)->with('errors',['You\'re trying to access other student data']);
+        }
 	}
 
 	/**
