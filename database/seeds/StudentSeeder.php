@@ -17,6 +17,10 @@ class StudentSeeder extends Seeder{
             'id'=>562115014,
             'password'=>bcrypt(5014)
         ));
+        Student::create(array(
+            'id'=>562115015,
+            'password'=>bcrypt(5015)
+        ));
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

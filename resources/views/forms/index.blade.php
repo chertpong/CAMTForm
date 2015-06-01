@@ -10,7 +10,7 @@
                     <div class="panel-body">
                         <div class="col-md-6">
                             <ul class="list-group">
-                                <a class="list-group-item" href="">Student</a>
+                                <a class="list-group-item" href="{{url('forms/students/'.$student->id)}}">Student</a>
                                 <a class="list-group-item" href="">Family</a>
                                 <a class="list-group-item" href="">Military</a>
                                 <a class="list-group-item" href="">Scholarship</a>

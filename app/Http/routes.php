@@ -28,4 +28,16 @@ Route::get('login/students', 'StudentLoginController@index');
 Route::post('login/students', 'StudentLoginController@postLogin');
 Route::get('logout/students', 'StudentLoginController@getLogout');
 
+
 Route::get('forms', ['middleware'=>'student','uses'=>'FormController@index']);
+
+
+Route::get('forms/students/{id}',['middleware'=>'student','uses'=>'StudentController@edit']);
+Route::put('forms/students/{id}',['middleware'=>'student','uses'=>'StudentController@update']);
+
+//Route::get('forms/education-history',['middleware'=>'student','uses'=>'FormController@index']);
+//Route::get('forms/family}',['middleware'=>'student','uses'=>'FormController@index']);
+//Route::get('forms/loan-history',['middleware'=>'student','uses'=>'FormController@index']);
+//Route::get('forms/scholarship-history',['middleware'=>'student','uses'=>'FormController@index']);
+
+

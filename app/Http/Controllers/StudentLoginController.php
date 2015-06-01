@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Student;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+
 class StudentLoginController extends Controller {
 
 	/**
@@ -27,12 +29,28 @@ class StudentLoginController extends Controller {
      */
     public function postLogin(Request $request)
     {
+        $validator = Validator::make(
+            [
+                'id'=>$request->id,
+                'password'=>$request->password
+            ],
+            [
+                'id'=>'required|min:9|integer',
+                'password'=>'required'
+            ],
+            [
+                'id'=>'Student\'s ID is incorrect, or it must not be null',
+                'password'=>'Password is required'
+            ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
         if(Hash::check($request->input('password'),Student::find($request->input('id'))->password)) {
             Session::put('studentId', $request->input('id'));
             return redirect('forms');
         }
         else{
-            return redirect()->back()->with('errors','Password or id is not correct');
+            return redirect()->back()->with('errors',['ID or Password is incorrect']);
         }
     }
 
