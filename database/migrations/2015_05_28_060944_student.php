@@ -17,8 +17,8 @@ class Student extends Migration {
             $table->string('id')->primary();
             $table->string('password',60);
             $table->date('DOB');
-            $table->string('nationality');
-            $table->string('race');
+            $table->integer('nationality');
+            $table->integer('race');
             $table->string('identication_no');
             $table->string('gender');
             $table->string('prefix');

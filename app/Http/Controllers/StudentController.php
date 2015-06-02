@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Student;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 class StudentController extends Controller {
 
 	/**
@@ -75,12 +76,27 @@ class StudentController extends Controller {
 	public function update(Request $request, $id)
 	{
         $student = Student::find(Session::get('studentId'));
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'identication_no'=>'integer|digits:13|required',
+                'name' => 'required',
+                'lastname' => 'required',
+                'race' => 'required',
+                'nationality' => 'required'
+            ]);
+        if($validator->fails()){
+            return view('students.edit')->with('student',$student)->with('errors',$validator->errors()->all());
+        }
+
         if($id == Session::get('studentId')) {
             $student->identication_no = $request->get('identication_no');
             $student->name = $request->get('name');
             $student->lastname = $request->get('lastname');
             $student->race = $request->get('race');
             $student->nationality = $request->get('nationality');
+            $student->DOB = $request->get('DOB');
+            $student->gender = $request->get('gender');
             $student->save();
 
             $success = 'Student\' information is updated';

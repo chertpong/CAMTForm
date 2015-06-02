@@ -24,6 +24,7 @@
                         @endif
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('forms/students/'.$student->id) }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input name="_method" type="hidden" value="PUT">
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Student ID</label>
@@ -55,23 +56,243 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Date of birth(เดือน/วัน/ปี)</label>
+                                <label class="col-md-4 control-label">Date of birth(เดือน/วัน/ปี)<br>ตัวอย่าง 04/12/1994</label>
                                 <div class="col-md-6">
                                     <input type="date" class="form-control" name="DOB" value="{{ $student->DOB }}">
+                                </div>
+                            </div>
+
+                            <?php
+                            $nationals = [
+                                    'Afghan',
+                                    'Albanian',
+                                    'Algerian',
+                                    'American',
+                                    'Andorran',
+                                    'Angolan',
+                                    'Antiguans',
+                                    'Argentinean',
+                                    'Armenian',
+                                    'Australian',
+                                    'Austrian',
+                                    'Azerbaijani',
+                                    'Bahamian',
+                                    'Bahraini',
+                                    'Bangladeshi',
+                                    'Barbadian',
+                                    'Barbudans',
+                                    'Batswana',
+                                    'Belarusian',
+                                    'Belgian',
+                                    'Belizean',
+                                    'Beninese',
+                                    'Bhutanese',
+                                    'Bolivian',
+                                    'Bosnian',
+                                    'Brazilian',
+                                    'British',
+                                    'Bruneian',
+                                    'Bulgarian',
+                                    'Burkinabe',
+                                    'Burmese',
+                                    'Burundian',
+                                    'Cambodian',
+                                    'Cameroonian',
+                                    'Canadian',
+                                    'Cape Verdean',
+                                    'Central African',
+                                    'Chadian',
+                                    'Chilean',
+                                    'Chinese',
+                                    'Colombian',
+                                    'Comoran',
+                                    'Congolese',
+                                    'Costa Rican',
+                                    'Croatian',
+                                    'Cuban',
+                                    'Cypriot',
+                                    'Czech',
+                                    'Danish',
+                                    'Djibouti',
+                                    'Dominican',
+                                    'Dutch',
+                                    'East Timorese',
+                                    'Ecuadorean',
+                                    'Egyptian',
+                                    'Emirian',
+                                    'Equatorial Guinean',
+                                    'Eritrean',
+                                    'Estonian',
+                                    'Ethiopian',
+                                    'Fijian',
+                                    'Filipino',
+                                    'Finnish',
+                                    'French',
+                                    'Gabonese',
+                                    'Gambian',
+                                    'Georgian',
+                                    'German',
+                                    'Ghanaian',
+                                    'Greek',
+                                    'Grenadian',
+                                    'Guatemalan',
+                                    'Guinea-Bissauan',
+                                    'Guinean',
+                                    'Guyanese',
+                                    'Haitian',
+                                    'Herzegovinian',
+                                    'Honduran',
+                                    'Hungarian',
+                                    'I-Kiribati',
+                                    'Icelander',
+                                    'Indian',
+                                    'Indonesian',
+                                    'Iranian',
+                                    'Iraqi',
+                                    'Irish',
+                                    'Israeli',
+                                    'Italian',
+                                    'Ivorian',
+                                    'Jamaican',
+                                    'Japanese',
+                                    'Jordanian',
+                                    'Kazakhstani',
+                                    'Kenyan',
+                                    'Kittian and Nevisian',
+                                    'Kuwaiti',
+                                    'Kyrgyz',
+                                    'Laotian',
+                                    'Latvian',
+                                    'Lebanese',
+                                    'Liberian',
+                                    'Libyan',
+                                    'Liechtensteiner',
+                                    'Lithuanian',
+                                    'Luxembourger',
+                                    'Macedonian',
+                                    'Malagasy',
+                                    'Malawian',
+                                    'Malaysian',
+                                    'Maldivan',
+                                    'Malian',
+                                    'Maltese',
+                                    'Marshallese',
+                                    'Mauritanian',
+                                    'Mauritian',
+                                    'Mexican',
+                                    'Micronesian',
+                                    'Moldovan',
+                                    'Monacan',
+                                    'Mongolian',
+                                    'Moroccan',
+                                    'Mosotho',
+                                    'Motswana',
+                                    'Mozambican',
+                                    'Namibian',
+                                    'Nauruan',
+                                    'Nepalese',
+                                    'New Zealander',
+                                    'Nicaraguan',
+                                    'Nigerian',
+                                    'Nigerien',
+                                    'North Korean',
+                                    'Northern Irish',
+                                    'Norwegian',
+                                    'Omani',
+                                    'Pakistani',
+                                    'Palauan',
+                                    'Panamanian',
+                                    'Papua New Guinean',
+                                    'Paraguayan',
+                                    'Peruvian',
+                                    'Polish',
+                                    'Portuguese',
+                                    'Qatari',
+                                    'Romanian',
+                                    'Russian',
+                                    'Rwandan',
+                                    'Saint Lucian',
+                                    'Salvadoran',
+                                    'Samoan',
+                                    'San Marinese',
+                                    'Sao Tomean',
+                                    'Saudi',
+                                    'Scottish',
+                                    'Senegalese',
+                                    'Serbian',
+                                    'Seychellois',
+                                    'Sierra Leonean',
+                                    'Singaporean',
+                                    'Slovakian',
+                                    'Slovenian',
+                                    'Solomon Islander',
+                                    'Somali',
+                                    'South African',
+                                    'South Korean',
+                                    'Spanish',
+                                    'Sri Lankan',
+                                    'Sudanese',
+                                    'Surinamer',
+                                    'Swazi',
+                                    'Swedish',
+                                    'Swiss',
+                                    'Syrian',
+                                    'Taiwanese',
+                                    'Tajik',
+                                    'Tanzanian',
+                                    'Thai',
+                                    'Togolese',
+                                    'Tongan',
+                                    'Trinidadian/Tobagonian',
+                                    'Tunisian',
+                                    'Turkish',
+                                    'Tuvaluan',
+                                    'Ugandan',
+                                    'Ukrainian',
+                                    'Uruguayan',
+                                    'Uzbekistani',
+                                    'Venezuelan',
+                                    'Vietnamese',
+                                    'Welsh',
+                                    'Yemenite',
+                                    'Zambian',
+                                    'Zimbabwean'
+                            ];
+                                $nationalsSize = count($nationals);
+                            ?>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Nationality (สัญชาติ)</label>
+                                <div class="col-md-6">
+                                    <select id="nationality" name="nationality" class="form-control">
+                                        <option value="" disabled @if($student->gender == null) selected @endif>Please select</option>
+                                        @for($i = 0; $i<$nationalsSize; $i++)
+                                            <option value="{{$i+1}}">{{$nationals[$i]}}</option>
+                                        @endfor
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Race (เชื้อชาติ)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="race" value="{{ $student->race }}">
+                                    <select id="race" name="race" class="form-control">
+                                        <option value="" disabled @if($student->race == null) selected @endif>Please select</option>
+                                        @for($i = 0; $i<$nationalsSize; $i++)
+                                            <option value="{{$i+1}}">{{$nationals[$i]}}</option>
+                                        @endfor
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Nationality (สัญชาติ)</label>
+                                <label class="col-md-4 control-label">Gender (เพศ)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="nationality" value="{{ $student->nationality }}">
+                                    <select id="gender" name="gender" class="form-control">
+                                        <option value="" disabled @if($student->gender == null) selected @endif>Please select</option>
+                                        <option value="1">Male(ชาย)</option>
+                                        <option value="2">Female(หญิง)</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -86,4 +307,14 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function(){
+            $("#race").val({{$student->race}});
+            $("#nationality").val({{$student->nationality}});
+            $("#gender").val({{$student->gender}});
+        });
+    </script>
 @endsection
