@@ -311,7 +311,25 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Skill (ความสามารถพิเศษ)</label>
+                                <div class="col-md-6">
+                                    <select id="skill" name="skill" class="form-control">
+                                        <option value="0" disabled @if($student->skill == 0) selected @endif>Please select</option>
+                                        <option value="1">ยังค้นไม่พบ</option>
+                                        <option value="2">วิชาการ</option>
+                                        <option value="3">กีฬา</option>
+                                        <option value="4">ดนตรี</option>
+                                    </select>
+                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Skill detail (ข้อมูลเพิ่มเติมสำหรับความสามารถพิเศษ)</label>
+                                <div class="col-md-6">
+                                    <textarea name="skill_detail" class="form-control" rows="4">{{$student->skill_detail}}</textarea>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Major (สาขา)</label>
@@ -361,6 +379,7 @@
 @section('script')
     <script type="text/javascript" language="javascript">
         $(document).ready(function(){
+            $("#skill").val({{$student->skill}});
             $("#race").val({{$student->race}});
             $("#nationality").val({{$student->nationality}});
             $("#gender").val({{$student->gender}});

@@ -89,7 +89,8 @@ class StudentController extends Controller {
                 'major' => 'required|integer',
                 'degree' => 'required|integer',
                 'adviser' => 'integer',
-                'phone_number' => 'required'
+                'phone_number' => 'required',
+                'skill' =>'integer'
             ]);
         if($validator->fails()){
             return view('students.edit')->with('student',$student)->with('errors',$validator->errors()->all());
@@ -108,6 +109,8 @@ class StudentController extends Controller {
             $student->degree = $request->get('degree');
             $student->adviser = $request->get('adviser');
             $student->phone_number = $request->get('phone_number');
+            $student->skill = $request->get('skill');
+            $student->skill_detail = $request->get('skill_detail');
             $student->save();
 
             $success = 'Student\' information is updated';

@@ -14,6 +14,9 @@ class SkillSeeder extends Seeder {
         DB::table('skill')->delete();
         $skills = array(
             array(
+                'skill_type'=>'ยังค้นไม่พบ'
+            ),
+            array(
                 'skill_type'=>'วิชาการ'
             ),
             array(
