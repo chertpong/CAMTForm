@@ -19,9 +19,9 @@ class Student extends Migration {
             $table->date('DOB');
             $table->integer('nationality');
             $table->integer('race');
-            $table->string('identication_no');
-            $table->string('gender');
-            $table->string('prefix');
+            $table->string('identication_no',13);
+            $table->integer('gender');
+            $table->string('prefix',4);
             $table->string('name');
             $table->string('lastname');
             $table->integer('major')->unsigned();

@@ -79,11 +79,17 @@ class StudentController extends Controller {
         $validator = Validator::make(
             $request->all(),
             [
-                'identication_no'=>'integer|digits:13|required',
+                'identication_no'=>'digits:13|required',
                 'name' => 'required',
                 'lastname' => 'required',
                 'race' => 'required',
-                'nationality' => 'required'
+                'nationality' => 'required',
+                'gender' => 'required|integer',
+                'prefix' => 'required|alpha',
+                'major' => 'required|integer',
+                'degree' => 'required|integer',
+                'adviser' => 'integer',
+                'phone_number' => 'required'
             ]);
         if($validator->fails()){
             return view('students.edit')->with('student',$student)->with('errors',$validator->errors()->all());
@@ -97,6 +103,11 @@ class StudentController extends Controller {
             $student->nationality = $request->get('nationality');
             $student->DOB = $request->get('DOB');
             $student->gender = $request->get('gender');
+            $student->prefix = $request->get('prefix');
+            $student->major = $request->get('major');
+            $student->degree = $request->get('degree');
+            $student->adviser = $request->get('adviser');
+            $student->phone_number = $request->get('phone_number');
             $student->save();
 
             $success = 'Student\' information is updated';

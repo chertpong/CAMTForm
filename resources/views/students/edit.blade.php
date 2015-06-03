@@ -40,6 +40,17 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Prefix(คำนำหน้าชื่อ)</label>
+                                <div class="col-md-6">
+                                    <select id="prefix" name="prefix" class="form-control">
+                                        <option value="" disabled @if($student->prefix == null) selected @endif>Please select</option>
+                                        <option value="MR">MR.(นาย)</option>
+                                        <option value="MS">MS.(นางสาว)</option>
+                                        <option value="MRS">MRS.(นาง)</option>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">First name (ชื่อ)</label>
@@ -54,11 +65,26 @@
                                     <input type="text" class="form-control" name="lastname" value="{{ $student->lastname }}">
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Gender (เพศ)</label>
+                                <div class="col-md-6">
+                                    <select id="gender" name="gender" class="form-control">
+                                        <option value="0" disabled @if($student->gender == 0) selected @endif>Please select</option>
+                                        <option value="1">Male(ชาย)</option>
+                                        <option value="2">Female(หญิง)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Phone number(เบอร์โทรศัพท์)</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="phone_number" value="{{ $student->phone_number }}">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Date of birth(เดือน/วัน/ปี)<br>ตัวอย่าง 04/12/1994</label>
                                 <div class="col-md-6">
-                                    <input type="date" class="form-control" name="DOB" value="{{ $student->DOB }}">
+                                    <input id="date" type="date" class="form-control" name="DOB" value="{{ $student->DOB }}">
                                 </div>
                             </div>
 
@@ -265,7 +291,7 @@
                                 <label class="col-md-4 control-label">Nationality (สัญชาติ)</label>
                                 <div class="col-md-6">
                                     <select id="nationality" name="nationality" class="form-control">
-                                        <option value="" disabled @if($student->gender == null) selected @endif>Please select</option>
+                                        <option value="0" disabled @if($student->nationality == 0) selected @endif>Please select</option>
                                         @for($i = 0; $i<$nationalsSize; $i++)
                                             <option value="{{$i+1}}">{{$nationals[$i]}}</option>
                                         @endfor
@@ -277,7 +303,7 @@
                                 <label class="col-md-4 control-label">Race (เชื้อชาติ)</label>
                                 <div class="col-md-6">
                                     <select id="race" name="race" class="form-control">
-                                        <option value="" disabled @if($student->race == null) selected @endif>Please select</option>
+                                        <option value="0" disabled @if($student->race == 0) selected @endif>Please select</option>
                                         @for($i = 0; $i<$nationalsSize; $i++)
                                             <option value="{{$i+1}}">{{$nationals[$i]}}</option>
                                         @endfor
@@ -285,17 +311,40 @@
                                 </div>
                             </div>
 
+
+
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Gender (เพศ)</label>
+                                <label class="col-md-4 control-label">Major (สาขา)</label>
                                 <div class="col-md-6">
-                                    <select id="gender" name="gender" class="form-control">
-                                        <option value="" disabled @if($student->gender == null) selected @endif>Please select</option>
-                                        <option value="1">Male(ชาย)</option>
-                                        <option value="2">Female(หญิง)</option>
+                                    <select id="major" name="major" class="form-control">
+                                        <option value="0" disabled @if($student->major == 0) selected @endif>Please select</option>
+                                        <option value="1">วิศวกรรมซอฟต์แวร์</option>
+                                        <option value="2">แอนนิเมชัน</option>
+                                        <option value="3">การจัดการสมัยใหม่</option>
                                     </select>
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Degree (ระดับการศึกษา)</label>
+                                <div class="col-md-6">
+                                    <select id="degree" name="degree" class="form-control">
+                                        <option value="0" disabled @if($student->degree == 0) selected @endif>Please select</option>
+                                        <option value="1">Undergraduate (ปริญญาตรี)</option>
+                                        <option value="2">Master (ปริญญาโท)</option>
+                                        <option value="3">Ph.D (ปริญญาเอก)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Adviser (อาจารย์ที่ปรึกษา)</label>
+                                <div class="col-md-6">
+                                    <select id="adviser" name="adviser" class="form-control">
+                                        <option value="0" disabled @if($student->adviser == 0) selected @endif>Please select</option>
+                                        <option value="1">จารโตววววว</option>
+                                        <option value="2">จารโจ้ววววว</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -315,6 +364,9 @@
             $("#race").val({{$student->race}});
             $("#nationality").val({{$student->nationality}});
             $("#gender").val({{$student->gender}});
+            $("#prefix").val({{$student->prefix}});
+            $("#major").val({{$student->major}});
+            $("#degree").val({{$student->degree}});
         });
     </script>
 @endsection
