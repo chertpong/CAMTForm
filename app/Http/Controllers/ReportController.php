@@ -4,7 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-
+use App\Student;
 class ReportController extends Controller {
 
 	/**
@@ -14,9 +14,18 @@ class ReportController extends Controller {
 	 */
 	public function index()
 	{
-		return response()->json(['data'=>['msg'=>'ok']]);
+		return view('reports.index');
 	}
 
+    public function searchId(Request $request){
+        $student = Student::find($request->id);
+        if($student != null){
+            return view('reports.index')->with('student',$student);
+        }
+        else{
+            return view('reports.index')->with('error','Student ID is invalid');
+        }
+    }
 	/**
 	 * Show the form for creating a new resource.
 	 *

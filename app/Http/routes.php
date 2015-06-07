@@ -23,6 +23,7 @@ Route::controllers([
 Route::get('roles',['middleware'=>'admin','uses'=>'Auth\RoleController@index']);
 
 Route::get('reports',['middleware'=>'mod','uses'=>'ReportController@index']);
+Route::post('reports/students',['middleware'=>'mod','uses'=>'ReportController@searchId']);
 
 Route::get('login/students', 'StudentLoginController@index');
 Route::post('login/students', 'StudentLoginController@postLogin');
@@ -39,5 +40,6 @@ Route::put('forms/students/{id}',['middleware'=>'student','uses'=>'StudentContro
 //Route::get('forms/family}',['middleware'=>'student','uses'=>'FormController@index']);
 //Route::get('forms/loan-history',['middleware'=>'student','uses'=>'FormController@index']);
 //Route::get('forms/scholarship-history',['middleware'=>'student','uses'=>'FormController@index']);
+
 
 
