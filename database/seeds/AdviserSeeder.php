@@ -8,6 +8,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\Adviser;
+use Illuminate\Support\Facades\DB;
 class AdviserSeeder extends Seeder{
     public function run(){
         DB::table('adviser')->delete();
