@@ -54,7 +54,7 @@ class AddressController extends Controller {
                 'sub_district'=>'required',
                 'district'=>'required',
                 'province'=>'required',
-                'postal'=>'required|integer',
+                'postal'=>'required|integer'
             ]);
         if($validator->fails()){
             return back()->with('errors',$validator->errors()->all());

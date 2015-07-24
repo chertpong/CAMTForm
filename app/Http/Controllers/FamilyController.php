@@ -2,8 +2,10 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Student;
 
 class FamilyController extends Controller {
 
@@ -12,19 +14,44 @@ class FamilyController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($id)
 	{
-		//
+        return view('family.index')->with('student',Student::find($id));
 	}
+    public function form($id)
+    {
+        return view('family.form')->with('student',Student::find($id));
+    }
 
 	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
-		//
+        $student = Student::find(Session::get('studentId'));
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'lastname' => 'required',
+                'status'=>'required',
+                'identication_no'=>'digits:13|required',
+                'degree' => 'required|integer',
+                'college'=>'required',
+                'job'=>'required',
+                'land_owner'=>'required|integer',
+                'income_month'=>'required|integer',
+                'income_year'=>'required|integer',
+                'phone_number' => 'required',
+            ]);
+        if($validator->fails()){
+            return back()->with('errors',$validator->errors()->all());
+        }
+       $familymember = FamilyMember::create($request->all());
+        $familymember->studentid=$student->id;
+        $familymember->save();
 	}
 
 	/**
@@ -56,13 +83,7 @@ class FamilyController extends Controller {
 	 */
     public function edit($id)
     {
-        $student = Student::find(Session::get('studentId'));
-        if($id == Session::get('studentId')) {
-            return view('students.edit')->with('student', $student);
-        }
-        else{
-            return view('students.edit')->with('student', $student)->with('errors',['You\'re trying to access other student data']);
-        }
+
     }
 
     /**
@@ -73,42 +94,7 @@ class FamilyController extends Controller {
      */
     public function update(Request $request, $id)
     {
-        $student = Student::find(Session::get('studentId'));
-        $validator = Validator::make(
-            $request->all(),
-            [
 
-            ]);
-        if($validator->fails()){
-            return view('students.edit')->with('student',$student)->with('errors',$validator->errors()->all());
-        }
-
-        if($id == Session::get('studentId')) {
-            $student->identication_no = $request->get('identication_no');
-            $student->name = $request->get('name');
-            $student->lastname = $request->get('lastname');
-            $student->race = $request->get('race');
-            $student->nationality = $request->get('nationality');
-            $student->DOB = $request->get('DOB');
-            $student->gender = $request->get('gender');
-            $student->prefix = $request->get('prefix');
-            $student->major = $request->get('major');
-            $student->degree = $request->get('degree');
-            $student->adviser = $request->get('adviser');
-            $student->phone_number = $request->get('phone_number');
-            $student->skill = $request->get('skill');
-            $student->skill_detail = $request->get('skill_detail');
-
-            $address = Address::find($student->address_id);
-
-            $student->save();
-
-            $success = 'Student\' information is updated';
-            return view('students.edit')->with('student', $student)->with('success',$success);
-        }
-        else{
-            return view('students.edit')->with('student', $student)->with('errors',['You\'re trying to access other student data']);
-        }
     }
 
     /**

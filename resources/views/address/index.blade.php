@@ -28,49 +28,49 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Number (บ้านเลขที่)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="number" value="{{ $student->id }}" >
+                                    <input type="text" class="form-control" name="number">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Village (หมู่บ้าน)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="village" value="{{ $student->identication_no }}">
+                                    <input type="text" class="form-control" name="village">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Street (หมู่บ้าน)</label>
+                                <label class="col-md-4 control-label">Street (ซอย)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="street" value="{{ $student->identication_no }}">
+                                    <input type="text" class="form-control" name="street">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Road (หมู่บ้าน)</label>
+                                <label class="col-md-4 control-label">Road (ถนน)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="road" value="{{ $student->identication_no }}">
+                                    <input type="text" class="form-control" name="road">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Sub district (หมู่บ้าน)</label>
+                                <label class="col-md-4 control-label">Sub district (ดำบล/แขวง)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="sub_distric" value="{{ $student->identication_no }}">
+                                    <input type="text" class="form-control" name="sub_distric">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-4 control-label">District (หมู่บ้าน)</label>
+                                <label class="col-md-4 control-label">District (อำเภอ/เขต)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="distric" value="{{ $student->identication_no }}">
+                                    <input type="text" class="form-control" name="distric">
                                 </div>
                             </div><div class="form-group">
-                                <label class="col-md-4 control-label">Province/City (หมู่บ้าน)</label>
+                                <label class="col-md-4 control-label">Province/City (จังหวัดเ)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="province" value="{{ $student->identication_no }}">
+                                    <input type="text" class="form-control" name="province">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Postal (หมู่บ้าน)</label>
+                                <label class="col-md-4 control-label">Postal (รหัสไปษณีย์)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="postal" value="{{ $student->identication_no }}">
+                                    <input type="text" class="form-control" name="postal">
                                 </div>
                             </div>
 

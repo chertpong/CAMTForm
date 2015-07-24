@@ -29,16 +29,18 @@ Route::get('login/students', 'StudentLoginController@index');
 Route::post('login/students', 'StudentLoginController@postLogin');
 Route::get('logout/students', 'StudentLoginController@getLogout');
 
-
 Route::get('forms', ['middleware'=>'student','uses'=>'FormController@index']);
-
 
 Route::get('forms/students/{id}',['middleware'=>'student','uses'=>'StudentController@edit']);
 Route::put('forms/students/{id}',['middleware'=>'student','uses'=>'StudentController@update']);
 Route::get('forms/address/{id}',['middleware'=>'student','uses'=>'AddressController@index']);
 Route::post('forms/address/{id}',['middleware'=>'student','uses'=>'AddressController@updateForignkeyStudent']);
-Route::post('forms/family/{id}',['middleware'=>'student','uses'=>'AddressController@updateForignkeyfamily']);
-Route::resource('Krit','FamilyController');
+
+Route::get('forms/family/{id}',['middleware'=>'student','uses'=>'FamilyController@index']);
+Route::get('forms/family/form/{id}',['middleware'=>'student','uses'=>'FamilyController@form']);
+Route::post('forms/family/form/{id}',['middleware'=>'student','uses'=>'FamilyController@create']);
+Route::post('forms/address/{id}',['middleware'=>'student','uses'=>'AddressController@updateForignkeyFamily']);
+//TODO family form submit-> address
 
 //Route::get('forms/education-history',['middleware'=>'student','uses'=>'FormController@index']);
 //Route::get('forms/family}',['middleware'=>'student','uses'=>'FormController@index']);
