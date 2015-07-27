@@ -24,6 +24,8 @@ Route::get('roles',['middleware'=>'admin','uses'=>'Auth\RoleController@index']);
 
 Route::get('reports',['middleware'=>'mod','uses'=>'ReportController@index']);
 Route::post('reports/students',['middleware'=>'mod','uses'=>'ReportController@searchId']);
+Route::get('reports/students/id/{id}/download',['middleware'=>'mod','uses'=>'StudentController@download']);
+
 
 Route::get('login/students', 'StudentLoginController@index');
 Route::post('login/students', 'StudentLoginController@postLogin');
@@ -41,6 +43,7 @@ Route::get('forms/family/form/{id}',['middleware'=>'student','uses'=>'FamilyCont
 Route::post('forms/family/form/{id}',['middleware'=>'student','uses'=>'FamilyController@create']);
 Route::post('forms/address/{id}',['middleware'=>'student','uses'=>'AddressController@updateForignkeyFamily']);
 //TODO family form submit-> address
+
 
 //Route::get('forms/education-history',['middleware'=>'student','uses'=>'FormController@index']);
 //Route::get('forms/family}',['middleware'=>'student','uses'=>'FormController@index']);
