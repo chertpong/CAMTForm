@@ -1,13 +1,11 @@
 <?php namespace App\Http\Controllers;
 
-use App\Address;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Student;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
-class StudentController extends Controller {
+
+class ScholarshipController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,7 +14,7 @@ class StudentController extends Controller {
 	 */
 	public function index()
 	{
-
+		//
 	}
 
 	/**
@@ -47,7 +45,7 @@ class StudentController extends Controller {
 	 */
 	public function show($id)
 	{
-        //
+		//
 	}
 
 	/**
@@ -56,8 +54,8 @@ class StudentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
-	{
+    public function edit($id)
+    {
         $student = Student::find(Session::get('studentId'));
         if($id == Session::get('studentId')) {
             return view('students.edit')->with('student', $student);
@@ -65,16 +63,16 @@ class StudentController extends Controller {
         else{
             return view('students.edit')->with('student', $student)->with('errors',['You\'re trying to access other student data']);
         }
-	}
+    }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update(Request $request, $id)
-	{
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update(Request $request, $id)
+    {
         $student = Student::find(Session::get('studentId'));
         $validator = Validator::make(
             $request->all(),
@@ -85,14 +83,21 @@ class StudentController extends Controller {
                 'lastname' => 'required',
                 'race' => 'required',
                 'nationality' => 'required',
-                'military_detail'=>'required',
                 'gender' => 'required|integer',
                 'major' => 'required|integer',
                 'degree' => 'required|integer',
                 'adviser' => 'integer',
-                'scholarshipid'=>'required|integer',
                 'phone_number' => 'required',
-                'skill' =>'integer'
+                'skill' =>'integer',
+
+                'number'=>'required',
+                'village'=>'required',
+                'street'=>'required',
+                'road'=>'required',
+                'sub_district'=>'required',
+                'district'=>'required',
+                'province'=>'required',
+                'postal'=>'required|integer',
             ]);
         if($validator->fails()){
             return view('students.edit')->with('student',$student)->with('errors',$validator->errors()->all());
@@ -104,19 +109,15 @@ class StudentController extends Controller {
             $student->lastname = $request->get('lastname');
             $student->race = $request->get('race');
             $student->nationality = $request->get('nationality');
-            $student->military_detail=$request->get('military_detail');
             $student->DOB = $request->get('DOB');
             $student->gender = $request->get('gender');
             $student->prefix = $request->get('prefix');
             $student->major = $request->get('major');
             $student->degree = $request->get('degree');
             $student->adviser = $request->get('adviser');
-            $student->scholarship=$request->get('scholarship');
             $student->phone_number = $request->get('phone_number');
-            $student->father_mother_status = $request->get('father_mother_status');
             $student->skill = $request->get('skill');
             $student->skill_detail = $request->get('skill_detail');
-
             $student->save();
 
             $success = 'Student\' information is updated';
@@ -125,50 +126,17 @@ class StudentController extends Controller {
         else{
             return view('students.edit')->with('student', $student)->with('errors',['You\'re trying to access other student data']);
         }
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-    public function image($id)
-    {
-        $student = Student::find(Session::get('studentId'));
-        if($id == Session::get('studentId')) {
-            return view('students.image')->with('student', $student);
-        }
-        else{
-            return view('students.image')->with('student', $student)->with('errors',['You\'re trying to access other student data']);
-        }
     }
-    public function upload(Request $request, $id)
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
     {
-        $student = Student::find(Session::get('studentId'));
-        $v = Validator::make($request->all(), [
-            'image' => 'required',
-            'house1' => 'required',
-            'house2' => 'required'
-        ]);
-
-        if ($v->fails())
-        {
-            return redirect()->back()->with('student',$student)->with('errors',$v->errors()->all());
-        }
-        else if($id == Session::get('studentId')) {
-            
-            $student->image=$request->get('image');
-            $student->house1=$request->get('house1');
-            $student->house2=$request->get('house2');
-            $student->save();
-
-            $success = 'Student\' information is updated';
-            return view('students.image')->with('student', $student)->with('success',$success);
-        }
+        //
     }
+
 }

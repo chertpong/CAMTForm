@@ -21,9 +21,10 @@ class FamilyMember extends Migration {
             $table->string('name');
             $table->string('lastname');
             $table->string('status');
+            $table->date('DOB');
             $table->string('identication_no');
             $table->string('degree');
-            $table->string('collage');
+            $table->string('college');
             $table->integer('job')->unsigned();
             $table->foreign('job')->references('id')->on('job');
             $table->text('job_detail');
