@@ -17,7 +17,7 @@ class FamilyMember extends Migration {
             $table->increments('id');
             $table->string('student_id');
             $table->foreign('student_id')->references('id')->on('student');
-            $table->string('relation');
+            $table->integer('relation');
             $table->string('name');
             $table->string('lastname');
             $table->string('status');

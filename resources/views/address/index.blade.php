@@ -53,13 +53,13 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Sub district (ดำบล/แขวง)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="sub_distric">
+                                    <input type="text" class="form-control" name="sub_district">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">District (อำเภอ/เขต)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="distric">
+                                    <input type="text" class="form-control" name="district">
                                 </div>
                             </div><div class="form-group">
                                 <label class="col-md-4 control-label">Province/City (จังหวัดเ)</label>

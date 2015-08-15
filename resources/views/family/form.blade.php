@@ -17,17 +17,14 @@
                                 </ul>
                             </div>
                         @endif
-                        @if (isset($success))
-                            <div class="alert alert-success">
-                                <strong> Success!</strong> {{$success}}
-                            </div>
-                        @endif
+
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('forms/family/form/'.$student->id) }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Relation (ความสัมพันธ์)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="id" value="บิดา" disabled>
+                                    <input type="text" class="form-control" name="relation_s" value={{$parent}} disabled>
+                                    <input type="hidden" name="relation" value="{{$parent}}">
                                 </div>
                             </div>
 
@@ -62,7 +59,7 @@
                                 <label class="col-md-4 control-label">Status(สถานะภาพ)</label>
                                 <div class="col-md-6">
                                     <select id="status" name="status" class="form-control">
-                                        <option value="0" disabled @if($student->skill == 0) selected @endif>Please select</option>
+                                        <option value="0" disabled selected >Please select</option>
                                         <option value="1">เสียชีวิตแล้ว</option>
                                         <option value="2">ยังมีชีวิต</option>
                                     </select>
@@ -83,8 +80,8 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Job (อาชีพ)</label>
                                 <div class="col-md-6">
-                                    <select id="skill" name="skill" class="form-control">
-                                        <option value="0" disabled @if($student->skill == 0) selected @endif>Please select</option>
+                                    <select id="job" name="job" class="form-control">
+                                        <option value="0" disabled selected >Please select</option>
                                         <option value="1">รับราชการ/รัฐวิสาหกิจ</option>
                                         <option value="2">ค้าขาย-เจ้าของกิจการ</option>
                                         <option value="3">ค้าขาย-แผงลอย</option>

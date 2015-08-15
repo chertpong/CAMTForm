@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\FamilyMember;
 use App\Student;
 
 class FamilyController extends Controller {
@@ -18,9 +20,9 @@ class FamilyController extends Controller {
 	{
         return view('family.index')->with('student',Student::find($id));
 	}
-    public function form($id)
+    public function form($parent,$id)
     {
-        return view('family.form')->with('student',Student::find($id));
+        return view('family.form')->with('student',Student::find($id))->with('parent',$parent);
     }
 
 	/**
@@ -38,7 +40,7 @@ class FamilyController extends Controller {
                 'lastname' => 'required',
                 'status'=>'required',
                 'identication_no'=>'digits:13|required',
-                'degree' => 'required|integer',
+                'degree' => 'required',
                 'college'=>'required',
                 'job'=>'required',
                 'land_owner'=>'required|integer',
@@ -48,10 +50,23 @@ class FamilyController extends Controller {
             ]);
         if($validator->fails()){
             return back()->with('errors',$validator->errors()->all());
+        }else {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            $familymember = FamilyMember::create($request->all());
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            $familymember->student_id = $student->id;
+            if ($request->get('relation') == 'Father') {
+                $familymember->relation = 1;
+            } else if ($request->get('relation') == 'Mother') {
+                $familymember->relation = 2;
+            } else {
+                $familymember->relation = 3;
+            }
+            $familymember->save();
+
+            $success = 'Family\' information is updated';
+            return view('family.index')->with('student', $student)->with('success',$success);
         }
-       $familymember = FamilyMember::create($request->all());
-        $familymember->studentid=$student->id;
-        $familymember->save();
 	}
 
 	/**

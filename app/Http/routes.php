@@ -29,12 +29,28 @@ Route::get('login/students', 'StudentLoginController@index');
 Route::post('login/students', 'StudentLoginController@postLogin');
 Route::get('logout/students', 'StudentLoginController@getLogout');
 
-
 Route::get('forms', ['middleware'=>'student','uses'=>'FormController@index']);
-
 
 Route::get('forms/students/{id}',['middleware'=>'student','uses'=>'StudentController@edit']);
 Route::put('forms/students/{id}',['middleware'=>'student','uses'=>'StudentController@update']);
+Route::get('forms/address/{id}',['middleware'=>'student','uses'=>'AddressController@index']);
+Route::post('forms/address/{id}',['middleware'=>'student','uses'=>'AddressController@updateForignkeyStudent']);
+
+Route::get('forms/family/{id}',['middleware'=>'student','uses'=>'FamilyController@index']);
+Route::get('forms/family/{parent}/{id}',['middleware'=>'student','uses'=>'FamilyController@form']);
+Route::post('forms/family/form/{id}',['middleware'=>'student','uses'=>'FamilyController@create']);
+
+Route::post('forms/family/address/{id}',['middleware'=>'student','uses'=>'AddressController@updateForignkeyFamily']);
+//TODO family form submit-> address
+Route::get('forms/scholarship/{id}',['middleware'=>'student','uses'=>'ScholarshipController@index']);
+
+Route::get('forms/studentLoan/{id}',['middleware'=>'student','uses'=>'StudentLoanController@index']);
+
+Route::get('forms/education/{id}',['middleware'=>'student','uses'=>'EducationController@index']);
+
+Route::get('forms/image/{id}',['middleware'=>'student','uses'=>'StudentController@image']);
+Route::post('forms/image/{id}',['middleware'=>'student','uses'=>'StudentController@upload']);
+
 
 //Route::get('forms/education-history',['middleware'=>'student','uses'=>'FormController@index']);
 //Route::get('forms/family}',['middleware'=>'student','uses'=>'FormController@index']);
