@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Student ID: {{$student->id}}'s information</div>
+                    <div class="panel-heading">Student ID: {{$student->id}}'s information (please add your past scholarship)</div>
                     <div class="panel-body">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -26,7 +26,7 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="container">
                                 <div class="row clearfix">
-                                    <div class="col-md-8 column">
+                                    <div class="col-md-10 column">
                                         <table class="table table-bordered table-hover" id="tab_logic">
                                             <thead>
                                             <tr >
@@ -34,14 +34,16 @@
                                                     #
                                                 </th>
                                                 <th class="text-center">
-                                                    Name
+                                                    year (พศ.)
                                                 </th>
                                                 <th class="text-center">
-                                                    Mail
+                                                    type (ประเภทของทุน)
                                                 </th>
                                                 <th class="text-center">
-                                                    Mobile
+                                                    name (ชื่อทุนการศึกษา)
                                                 </th>
+                                                <th class="text-center">
+                                                    amount (จำนวน-บาท)
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -50,13 +52,16 @@
                                                     1
                                                 </td>
                                                 <td>
-                                                    <input type="text" name='name0'  placeholder='Name' class="form-control"/>
+                                                    <input type="text" name='year0'  placeholder='Year' class="form-control"/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name='mail0' placeholder='Mail' class="form-control"/>
+                                                    <input type="text" name='type0' placeholder='Type' class="form-control"/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name='mobile0' placeholder='Mobile' class="form-control"/>
+                                                    <input type="text" name='name0' placeholder='Name' class="form-control"/>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name='amount0' placeholder='Amount' class="form-control"/>
                                                 </td>
                                             </tr>
                                             <tr id='addr1'></tr>
@@ -80,7 +85,7 @@
         $(document).ready(function(){
             var i=1;
             $("#add_row").click(function(){
-                $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name"+i+"' type='text' placeholder='Name' class='form-control input-md'  /> </td><td><input  name='mail"+i+"' type='text' placeholder='Mail'  class='form-control input-md'></td><td><input  name='mobile"+i+"' type='text' placeholder='Mobile'  class='form-control input-md'></td>");
+                $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='year"+i+"' type='text' placeholder='Year' class='form-control input-md'  /> </td><td><input  name='type"+i+"' type='text' placeholder='Type'  class='form-control input-md'></td><td><input  name='name"+i+"' type='text' placeholder='Name'  class='form-control input-md'></td><td><input name='amount"+i+"' type='text' placeholder='Amount' class='form-control input-md'  /> </td>");
 
                 $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
                 i++;
