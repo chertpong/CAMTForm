@@ -21,5 +21,17 @@
         @endif
 
         @include('components.searchId')
+        @include('components.searchName')
+        @include('components.searchLastName')
+        @include('components.searchNameOrLastName')
+        @include('components.searchMajor')
+        @include('components.searchDegree')
+        @include('components.searchAdviser')
+        @include('components.searchScholarship')
+        @include('components.searchLoan')
+        @include('components.searchMilitaryDetail')
+        @include('components.searchFatherMotherStatus')
+        @include('components.searchPhoneNumber')
+        @include('components.searchSkill')
     </div>
 </div>
