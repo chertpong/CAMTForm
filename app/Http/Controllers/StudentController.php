@@ -116,6 +116,9 @@ class StudentController extends Controller {
             $student->father_mother_status = $request->get('father_mother_status');
             $student->skill = $request->get('skill');
             $student->skill_detail = $request->get('skill_detail');
+            $student->disease = $request->get('disease');
+            $student->treatment = $request->get('treatment');
+
 
             $student->save();
 

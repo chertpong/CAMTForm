@@ -406,9 +406,25 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                <label class="col-md-4 control-label">Disease (โรคประจำตัว)</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="disease" value="{{ $student->disease }}">
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Treatment (การรักษา/ยารักษา)</label>
+                                <div class="col-md-6">
+                                    <textarea name="treatment" class="form-control" rows="4">{{$student->treatment}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <span><div class="col-md-2 col-md-offset-4">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                <div class="col-md-2 ">
+                                    <a href="{{ url('forms') }}"> <button type="button" class="btn btn-primary">Back</button></a>
+                                </div>
+                                </span>
                             </div>
                         </form>
                     </div>

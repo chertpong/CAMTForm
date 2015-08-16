@@ -14,9 +14,9 @@
                     <div class="panel-body">
                         <div class="col-md-6">
                             <ul class="list-group">
-                                <a class="list-group-item" href="{{url('forms/family/Father/'.$student->id)}}">Father</a>
-                                <a class="list-group-item" href="{{url('forms/family/Mother/'.$student->id)}}">Mother</a>
-                                <a class="list-group-item" href="{{url('forms/family/Patent/'.$student->id)}}">Parent</a>
+                                <a class="list-group-item" href="{{url('forms/family/father/'.$student->id)}}">Father</a>
+                                <a class="list-group-item" href="{{url('forms/family/mother/'.$student->id)}}">Mother</a>
+                                <a class="list-group-item" href="{{url('forms/family/parent/'.$student->id)}}">Parent</a>
                             </ul>
                         </div>
                     </div>

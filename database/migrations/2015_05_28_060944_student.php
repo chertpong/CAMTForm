@@ -40,10 +40,18 @@ class Student extends Migration {
             $table->foreign('military_detail')->references('id')->on('military_detail');
             $table->integer('father_mother_status')->unsigned();
             $table->foreign('father_mother_status')->references('id')->on('father_mother_status');
+            $table->integer('father')->unsigned();
+            $table->foreign('father')->references('id')->on('family_member');
+            $table->integer('mother')->unsigned();
+            $table->foreign('mother')->references('id')->on('family_member');
+            $table->integer('parent')->unsigned();
+            $table->foreign('parent')->references('id')->on('family_member');
             $table->string('phone_number');
             $table->integer('skill')->unsigned();
             $table->foreign('skill')->references('id')->on('skill');
             $table->text('skill_detail');
+            $table->string('disease');
+            $table->text('treatment');
             $table->binary('image');
             $table->binary('house1');
             $table->binary('house2');
