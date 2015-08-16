@@ -174,4 +174,23 @@ class StudentController extends Controller {
             return view('students.image')->with('student', $student)->with('success',$success);
         }
     }
+    public function download($id)
+    {
+        if(Student::exists($id)){
+            $student = Student::find($id);
+            $mpdf = new \mPDF('utf-8','A4','','garuda');
+            $mpdf->SetHTMLFooter(iconv('TIS-620','UTF-8','
+                <table width="100%" style="vertical-align: bottom; font-family: garuda; font-size: 8pt; color: #000000; font-weight: bold; font-style: italic;"><tr>
+                <td width="33%"><span style="font-weight: bold; font-style: italic;">{DATE j-m-Y}</span></td>
+                <td width="33%" align="center" style="font-weight: bold; font-style: italic;">{PAGENO}/{nbpg}</td>
+                <td width="33%" style="text-align: right; ">ข้อมูลนักศึกษา CAMT</p></td>
+                </tr></table>
+            '));
+            $mpdf->WriteHTML(view('pdfs.student',compact('student'))->render());
+            $mpdf->Output($id.'student.pdf','D');
+            return back(200);
+            //return \PDF::loadView("pdfs.student",compact('student','title'))->download($id.'student.pdf');
+        }
+        return new Response('There is no student id:'+$id,200);
+    }
 }
