@@ -3,7 +3,7 @@
     <div class="col-md-10">
         @include('components.search')
     </div>
-        @if(isset($student))
+        @if(isset($students))
             <?php
                 $nationals = [
                     '0',
@@ -231,7 +231,8 @@
                     'จารโจ้ว'
                 ];
             ?>
-            <table class="table table-striped">
+            <table class="table table-striped table-hover table-bordered table-responsive">
+                {{--TODO add horizontal scroll--}}
                 <th>
                     <tr>
                         <td>ID</td>
@@ -249,8 +250,11 @@
                         <td>Skill</td>
                         <td>Skill detail</td>
                         <td>Adviser</td>
+                        <td>Download</td>
 
                     </tr>
+                </th>
+                @foreach($students as $student)
                     <tr>
                         <td>{{$student->id}}</td>
                         <td>{{$student->prefix}}</td>
@@ -267,9 +271,10 @@
                         <td>{{$skills[$student->skill]}}</td>
                         <td>{{$student->skill_detail}}</td>
                         <td>{{$advisers[$student->adviser]}}</td>
-
+                        <td><a href={{url('reports/students/id/'.$student->id.'/download')}}>Download</a></td>
                     </tr>
-                </th>
+                @endforeach
+
             </table>
         @endif
 
