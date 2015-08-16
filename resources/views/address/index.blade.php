@@ -28,56 +28,60 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Number (บ้านเลขที่)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="number">
+                                    <input type="text" class="form-control" name="number" @if(isset($address))value="{{$address->number}}"@endif>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Village (หมู่บ้าน)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="village">
+                                    <input type="text" class="form-control" name="village" @if(isset($address))value="{{$address->village}}"@endif>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Street (ซอย)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="street">
+                                    <input type="text" class="form-control" name="street" @if(isset($address))value="{{$address->street}}"@endif>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Road (ถนน)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="road">
+                                    <input type="text" class="form-control" name="road" @if(isset($address))value="{{$address->road}}"@endif>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Sub district (ดำบล/แขวง)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="sub_district">
+                                    <input type="text" class="form-control" name="sub_district" @if(isset($address))value="{{$address->sub_district}}"@endif>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">District (อำเภอ/เขต)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="district">
+                                    <input type="text" class="form-control" name="district" @if(isset($address))value="{{$address->district}}"@endif>
                                 </div>
                             </div><div class="form-group">
                                 <label class="col-md-4 control-label">Province/City (จังหวัดเ)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="province">
+                                    <input type="text" class="form-control" name="province" @if(isset($address))value="{{$address->province}}"@endif>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Postal (รหัสไปษณีย์)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="postal">
+                                    <input type="text" class="form-control" name="postal" @if(isset($address)) value="{{$address->postal}}"@endif>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                <span><div class="col-md-2 col-md-offset-4">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                <div class="col-md-2 ">
+                                    <a href="{{ url('forms') }}"> <button type="button" class="btn btn-primary">Back</button></a>
                                 </div>
+                                </span>
                             </div>
                         </form>
                     </div>
@@ -87,16 +91,3 @@
     </div>
 @endsection
 
-@section('script')
-    <script type="text/javascript" language="javascript">
-        $(document).ready(function(){
-            $("#skill").val({{$student->skill}});
-            $("#race").val({{$student->race}});
-            $("#nationality").val({{$student->nationality}});
-            $("#gender").val({{$student->gender}});
-            $("#prefix").val({{$student->prefix}});
-            $("#major").val({{$student->major}});
-            $("#degree").val({{$student->degree}});
-        });
-    </script>
-@endsection

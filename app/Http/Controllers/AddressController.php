@@ -19,6 +19,11 @@ class AddressController extends Controller {
 	 */
 	public function index($id)
 	{
+        $student=Student::find(Session::get('studentId'));
+        if($student->address != 0){
+            $address=Address::find($student->address);
+            return view('address.index')->with('student',Student::find($id))->with('address',$address);
+        }
 		return view('address.index')->with('student',Student::find($id));
 	}
 
@@ -59,32 +64,65 @@ class AddressController extends Controller {
         if($validator->fails()){
             return back()->with('errors',$validator->errors()->all());
         }else {
-            $address = Address::create($request->all());
             $student = Student::find(Session::get('studentId'));
+            if($student->address != 0){
+                $address=Address::find($student->address);
+                $address->number=$request->get('number');
+                $address->village=$request->get('village');
+                $address->street=$request->get('street');
+                $address->road=$request->get('road');
+                $address->sub_district=$request->get('sub_district');
+                $address->district=$request->get('district');
+                $address->province=$request->get('province');
+                $address->postal=$request->get('postal');
+                $address->save();
+                $success = 'Student\' information is updated';
+                return view('address.index')->with('student', $student)->with('success',$success)->with('address',$address);
+            }
+            $address = Address::create($request->all());
             $student->address = $address->id;
             $student->save();
-
             $success = 'Student\' information is updated';
-            return view('address.index')->with('student', $student)->with('success',$success);
+            return view('address.index')->with('student', $student)->with('success',$success)->with('address',$address);
         }
     }
-//    public function updateForignkeyFamily (Request $request,$Familyid)
-//    {
-//        $validator = Validator::make(
-//            $request->all(),
-//            [
-//                'number'=>'required',
-//                'sub_district'=>'required',
-//                'district'=>'required',
-//                'province'=>'required',
-//                'postal'=>'required|integer',
-//            ]);
-//        if($validator->fails()){
-//            return back()->with('errors',$validator->errors()->all());
-//        }
-//        $address = Address::create($request->all());
-//        FamilyMember::find($Familyid)->address_id = $address->id;
-//    }
+    public function updateForignkeyFamily (Request $request,$parent,$id,$familyId)
+    {
+        $student = Student::find(Session::get('studentId'));
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'number' => 'required',
+                'sub_district' => 'required',
+                'district' => 'required',
+                'province' => 'required',
+                'postal' => 'required|integer',
+            ]);
+        if ($validator->fails()) {
+            return back()->with('errors', $validator->errors()->all());
+        } else {
+            $familymember = FamilyMember::find($familyId);
+            if($familymember->address != 0){
+                $address=Address::find($familymember->address);
+                $address->number=$request->get('number');
+                $address->village=$request->get('village');
+                $address->street=$request->get('street');
+                $address->road=$request->get('road');
+                $address->sub_district=$request->get('sub_district');
+                $address->district=$request->get('district');
+                $address->province=$request->get('province');
+                $address->postal=$request->get('postal');
+                $address->save();
+                $success = 'Parent\' information is updated';
+                return view('address.family')->with('student', $student)->with('success', $success)->with('address', $address)->with('familymember', $familymember)->with('parent',$parent);
+            }else{
+            $address = Address::create($request->all());
+            $familymember->address = $address->id;
+            $familymember->save();
+            $success = 'Parent\' information is updated';
+            return view('address.family')->with('student', $student)->with('success', $success)->with('address', $address)->with('familymember', $familymember)->with('parent',$parent);
+        }}
+    }
 
 	/**
 	 * Store a newly created resource in storage.

@@ -15,8 +15,6 @@ class FamilyMember extends Migration {
         Schema::create('family_member', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('student_id');
-            $table->foreign('student_id')->references('id')->on('student');
             $table->integer('relation');
             $table->string('name');
             $table->string('lastname');
