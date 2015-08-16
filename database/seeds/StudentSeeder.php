@@ -15,7 +15,8 @@ class StudentSeeder extends Seeder{
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Student::create(array(
             'id'=>562115014,
-            'password'=>bcrypt(5014)
+            'password'=>bcrypt(5014),
+            'address'=>\App\Address::create([])->id
         ));
         Student::create(array(
             'id'=>562115015,

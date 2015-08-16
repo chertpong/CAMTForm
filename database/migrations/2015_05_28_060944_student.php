@@ -44,8 +44,9 @@ class Student extends Migration {
             $table->integer('skill')->unsigned();
             $table->foreign('skill')->references('id')->on('skill');
             $table->text('skill_detail');
-            $table->string('student_photo');
-            $table->string('house_photo');
+            $table->binary('image');
+            $table->binary('house1');
+            $table->binary('house2');
 
         });
 	}

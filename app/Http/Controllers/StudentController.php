@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Address;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -80,15 +80,17 @@ class StudentController extends Controller {
             $request->all(),
             [
                 'identication_no'=>'digits:13|required',
+                'prefix' => 'required|alpha',
                 'name' => 'required',
                 'lastname' => 'required',
                 'race' => 'required',
                 'nationality' => 'required',
+                'military_detail'=>'required',
                 'gender' => 'required|integer',
-                'prefix' => 'required|alpha',
                 'major' => 'required|integer',
                 'degree' => 'required|integer',
                 'adviser' => 'integer',
+                'scholarshipid'=>'required|integer',
                 'phone_number' => 'required',
                 'skill' =>'integer'
             ]);
@@ -102,15 +104,19 @@ class StudentController extends Controller {
             $student->lastname = $request->get('lastname');
             $student->race = $request->get('race');
             $student->nationality = $request->get('nationality');
+            $student->military_detail=$request->get('military_detail');
             $student->DOB = $request->get('DOB');
             $student->gender = $request->get('gender');
             $student->prefix = $request->get('prefix');
             $student->major = $request->get('major');
             $student->degree = $request->get('degree');
             $student->adviser = $request->get('adviser');
+            $student->scholarship=$request->get('scholarship');
             $student->phone_number = $request->get('phone_number');
+            $student->father_mother_status = $request->get('father_mother_status');
             $student->skill = $request->get('skill');
             $student->skill_detail = $request->get('skill_detail');
+
             $student->save();
 
             $success = 'Student\' information is updated';
@@ -131,30 +137,38 @@ class StudentController extends Controller {
 	{
 		//
 	}
-
-    /**
-     * Download the specified student profile.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function download($id)
+    public function image($id)
     {
-        if(Student::exists($id)){
-            $student = Student::find($id);
-            $mpdf = new \mPDF('utf-8','A4','','garuda');
-            $mpdf->SetHTMLFooter(iconv('TIS-620','UTF-8','
-                <table width="100%" style="vertical-align: bottom; font-family: garuda; font-size: 8pt; color: #000000; font-weight: bold; font-style: italic;"><tr>
-                <td width="33%"><span style="font-weight: bold; font-style: italic;">{DATE j-m-Y}</span></td>
-                <td width="33%" align="center" style="font-weight: bold; font-style: italic;">{PAGENO}/{nbpg}</td>
-                <td width="33%" style="text-align: right; ">ข้อมูลนักศึกษา CAMT</p></td>
-                </tr></table>
-            '));
-            $mpdf->WriteHTML(view('pdfs.student',compact('student'))->render());
-            $mpdf->Output($id.'student.pdf','D');
-            return back(200);
-            //return \PDF::loadView("pdfs.student",compact('student','title'))->download($id.'student.pdf');
+        $student = Student::find(Session::get('studentId'));
+        if($id == Session::get('studentId')) {
+            return view('students.image')->with('student', $student);
         }
-        return new Response('There is no student id:'+$id,200);
+        else{
+            return view('students.image')->with('student', $student)->with('errors',['You\'re trying to access other student data']);
+        }
+    }
+    public function upload(Request $request, $id)
+    {
+        $student = Student::find(Session::get('studentId'));
+        $v = Validator::make($request->all(), [
+            'image' => 'required',
+            'house1' => 'required',
+            'house2' => 'required'
+        ]);
+
+        if ($v->fails())
+        {
+            return redirect()->back()->with('student',$student)->with('errors',$v->errors()->all());
+        }
+        else if($id == Session::get('studentId')) {
+            
+            $student->image=$request->get('image');
+            $student->house1=$request->get('house1');
+            $student->house2=$request->get('house2');
+            $student->save();
+
+            $success = 'Student\' information is updated';
+            return view('students.image')->with('student', $student)->with('success',$success);
+        }
     }
 }

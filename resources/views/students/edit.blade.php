@@ -311,6 +311,26 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Military detail (ข้อมูลการทหาร)</label>
+                                <div class="col-md-6">
+                                    <select id="military_detail" name="military_detail" class="form-control">
+                                        <option value="0" disabled @if($student->gender == 0) selected @endif>Please select</option>
+                                        <option value="1">เป็น นศท. ปี 1 และ จะเรียนต่อ</option>
+                                        <option value="2">เป็น นศท. ปี 1 และจะไม่เรียนต่อ</option>
+                                        <option value="1">เป็น นศท. ปี 2 และ จะเรียนต่อ</option>
+                                        <option value="2">เป็น นศท. ปี 2 และจะไม่เรียนต่อ</option>
+                                        <option value="1">เป็น นศท. ปี 3 และ จะเรียนต่อ</option>
+                                        <option value="2">เป็น นศท. ปี 3 และจะไม่เรียนต่อ</option>
+                                        <option value="1">เป็น นศท. ปี 4 และ จะเรียนต่อ</option>
+                                        <option value="2">เป็น นศท. ปี 4 และจะไม่เรียนต่อ</option>
+                                        <option value="1">เป็น นศท. ปี 5 </option>
+                                        <option value="2">ไม่เป็น นศท และยังไม่ได้เกนทหาร</option>
+                                        <option value="1">ผ่านการเกนทหารแล้ว</option>
+                                        <option value="2">ไม่เป็น นศท ไม่ต้องเกนทหาร </option>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Skill (ความสามารถพิเศษ)</label>
@@ -344,7 +364,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Degree (ระดับการศึกษา)</label>
+                                <label class="col-md-4 control-label">Degree (ระดับการศึกษาปัจจุบัญ)</label>
                                 <div class="col-md-6">
                                     <select id="degree" name="degree" class="form-control">
                                         <option value="0" disabled @if($student->degree == 0) selected @endif>Please select</option>
@@ -361,6 +381,27 @@
                                         <option value="0" disabled @if($student->adviser == 0) selected @endif>Please select</option>
                                         <option value="1">จารโตววววว</option>
                                         <option value="2">จารโจ้ววววว</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">ความต้องการทุนการศึกษา</label>
+                                <div class="col-md-6">
+                                    <select id="scholarshipid" name="scholarshipid" class="form-control">
+                                        <option value="0" disabled @if($student->scholarshipid == 0) selected @endif>Please select</option>
+                                        <option value="1">ต้องการ</option>
+                                        <option value="2">ไม่ต้องการ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">สถานะภาพบิดามารดา</label>
+                                <div class="col-md-6">
+                                    <select id="father_mother_status" name="father_mother_status" class="form-control">
+                                        <option value="" disabled @if($student->prefix == null) selected @endif>Please select</option>
+                                        <option value="1">อยู่ด้วยกัน</option>
+                                        <option value="2">แยกกันอยู่</option>
+                                        <option value="3">หย่า</option>
                                     </select>
                                 </div>
                             </div>
