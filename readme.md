@@ -1,5 +1,5 @@
 ##Failed project
-
+This project was developed in the summer of 2015 in order to record new registed student history (main purpose is about loan (กยศ)). But it wasn't well planned and the cost of developing is too high (it's a free project but we spent too much time)
 
 ## Laravel PHP Framework
 
